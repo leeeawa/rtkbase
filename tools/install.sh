@@ -184,7 +184,7 @@ _compil_rtklib() {
     echo 'COMPILING RTKLIB 2.4.3 b34j'
     echo '################################'
     #Get Rtklib 2.4.3 b34j release
-    sudo -u "${RTKBASE_USER}" wget -qO - https://github.com/rtklibexplorer/RTKLIB/archive/refs/tags/b34j.tar.gz | tar -xvz
+    sudo -u "${RTKBASE_USER}" wget -qO - https://p.212231.xyz/https://github.com/rtklibexplorer/RTKLIB/archive/refs/tags/b34j.tar.gz | tar -xvz
     #Install Rtklib app
     #TODO add correct CTARGET in makefile?
     make --directory=RTKLIB-b34j/app/consapp/str2str/gcc
@@ -210,7 +210,7 @@ _rtkbase_repo(){
 
 _rtkbase_release(){
     #Get rtkbase latest release
-    sudo -u "${RTKBASE_USER}" wget https://github.com/stefal/rtkbase/releases/latest/download/rtkbase.tar.gz -O rtkbase.tar.gz
+    sudo -u "${RTKBASE_USER}" wget https://p.212231.xyz/https://github.com/stefal/rtkbase/releases/latest/download/rtkbase.tar.gz -O rtkbase.tar.gz
     sudo -u "${RTKBASE_USER}" tar -xvf rtkbase.tar.gz
     _add_rtkbase_path_to_environment
 
@@ -338,7 +338,7 @@ rtkbase_requirements(){
       #Then launch check cpu temp script for OPI zero LTS
       source "${rtkbase_path}/tools/opizero_temp_offset.sh"
       #venv module installation
-      sudo -u "${RTKBASE_USER}" "${python_venv}" -m pip install --upgrade pip setuptools wheel  --extra-index-url https://www.piwheels.org/simple
+      sudo -u "${RTKBASE_USER}" "${python_venv}" -m pip install --upgrade pip setuptools wheel  --extra-index-url https://mirrors.ustc.edu.cn/pypi/web/simple
       # install prebuilt wheel for cryptography because it is unavailable on piwheels (2023/01)
       # not needed anymore (2023/11)
       #if [[ $platform == 'armv7l' ]] && [[ $("${python_venv}" --version) =~ '3.7' ]]
@@ -348,12 +348,12 @@ rtkbase_requirements(){
       #  then
       #    sudo -u "${RTKBASE_USER}" "${python_venv}" -m pip install "${rtkbase_path}"/tools/wheel/cryptography-38.0.0-cp37-cp37m-linux_armv6l.whl
       #fi
-      sudo -u "${RTKBASE_USER}" "${python_venv}" -m pip install -r "${rtkbase_path}"/web_app/requirements.txt  --extra-index-url https://www.piwheels.org/simple
+      sudo -u "${RTKBASE_USER}" "${python_venv}" -m pip install -r "${rtkbase_path}"/web_app/requirements.txt  --extra-index-url https://mirrors.ustc.edu.cn/pypi/web/simple
       #when we will be able to launch the web server without root, we will use
       #sudo -u $(logname) python3 -m pip install -r requirements.txt --user.
       
       #Installing requirements for Cellular modem. Installing them during the Armbian firstrun doesn't work because the network isn't fully up.
-      sudo -u "${RTKBASE_USER}" "${rtkbase_path}/venv/bin/python" -m pip install nmcli  --extra-index-url https://www.piwheels.org/simple
+      sudo -u "${RTKBASE_USER}" "${rtkbase_path}/venv/bin/python" -m pip install nmcli  --extra-index-url https://mirrors.ustc.edu.cn/pypi/web/simple
       sudo -u "${RTKBASE_USER}" "${rtkbase_path}/venv/bin/python" -m pip install git+https://github.com/Stefal/sim-modem.git
 
 }
